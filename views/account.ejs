@@ -1,0 +1,41 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div id='balance' class="col">
+            <p>Balance <%= balance %></p>
+
+            <%= currentUser._id %>
+        </div>
+        <div id='transactionHistory' class="col">
+            <p>History</p>
+            <% userTransaction.forEach(function(transaction){ %>
+                <p><%= transaction %></p>
+                <% if(transaction.receiver == currentUser._id) { %>
+                    <p class='positive'>+ <%= transaction.amount %> <%= transaction.currency %></p>
+                <% } else { %>
+                    <p class='negative'>- <%= transaction.amount %> <%= transaction.currency %></p>
+                <% } %>
+                <p><%= transaction.sender %></p>
+                <p><%= transaction.date %></p>
+                <p><%= transaction.notes %></p>
+                <p><%= transaction.sender %></p>
+
+                <hr>
+            <% }); %>
+        </div>
+    </div>
+    <div class="row">
+        <div id='payment' class="col">
+            <p>Message and Notes</p>
+        </div>
+    </div>
+    <a href='/account/transaction' class='btn btn-lg btn-primary'>Payment</a>
+</div>
+
+
+
+<% include ../partials/footer %>
+
+
+

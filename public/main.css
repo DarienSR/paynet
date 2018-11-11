@@ -1,0 +1,12 @@
+.navbar.scrolled {
+    background: rgb(122, 23, 189);
+    transition: background 500ms;
+}
+
+.positive {
+    background: rgba(96, 238, 96, 0.493);
+}
+
+.negative {
+    background: rgba(219, 57, 57, 0.616);
+}
