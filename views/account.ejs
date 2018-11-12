@@ -2,36 +2,93 @@
 
 <div class="container">
     <div class="row">
-        <div id='balance' class="col">
-            <p>Balance <%= balance %></p>
-
+        <div id='balance' class="col border-right border-light m-3">
+            <p>Balance $<%= balance %></p>
             <%= currentUser._id %>
-        </div>
-        <div id='transactionHistory' class="col">
-            <p>History</p>
-            <% userTransaction.forEach(function(transaction){ %>
-                <p><%= transaction %></p>
-                <% if(transaction.receiver == currentUser._id) { %>
-                    <p class='positive'>+ <%= transaction.amount %> <%= transaction.currency %></p>
-                <% } else { %>
-                    <p class='negative'>- <%= transaction.amount %> <%= transaction.currency %></p>
-                <% } %>
-                <p><%= transaction.sender %></p>
-                <p><%= transaction.date %></p>
-                <p><%= transaction.notes %></p>
-                <p><%= transaction.sender %></p>
+            <%= currentUser.username %>
 
-                <hr>
-            <% }); %>
+        </div>
+
+        <div id='transactionHistory' class="col-md-6">
+            <h3 class='text-center m-3 pb-2 border-bottom border-dark'>Transaction History</h3>
+            <div class="spacing">
+                <div class="justify-content-middle">
+                    <% userTransaction.forEach(function(transaction){ %>
+                        <% if(transaction.to == currentUser._id) { %>
+                            
+                            <div class="row positive">
+                                <div class="col-6">
+                                    <p class="font-weight-bold font-italic m-2">+ $<%= transaction.amount%> <%= transaction.currency %></p>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <p class='m-2'><%= transaction.date %></p>
+                                </div>
+                            </div>
+                                
+                        <% } else { %>
+                            <div class="row negative">
+                                <div class="col-6">
+                                    <p class="font-weight-bold font-italic p-0 m-2">- $<%= transaction.amount%> <%= transaction.currency %></p>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <p class='p-0 m-2'><%= transaction.date %></p>
+                                </div>
+                            </div>        
+                        <% } %>
+        
+                        <!-- Ability to pull down more information  ADD FEATURE-->
+        
+                        <p class='text-center transactionInfo mt-2'>Transaction Information</p>
+                        <div class="row">
+                            <% if(transaction.from != currentUser._id) { %>
+                                <div class="col-md-6">
+                                    <p class='font-weight-bold'>From</p>
+                                </div>
+                                <div class="col-md-6 text-left text-md-right">
+                                    <p><%= transaction.from %></p>
+                                </div>   
+                            <% } else { %>
+                                <div class="col-md-6">
+                                    <p class='font-weight-bold'>To</p>
+                                </div>
+                                <div class="col-md-6 text-left text-md-right">
+                                    <p><%= transaction.to %></p>
+                                </div>    
+                            <% } %>
+                        </div>
+        
+                        <div class="row">
+                            <div class="col-md-2">
+                                <p class='font-weight-bold'>Notes</p>
+                            </div>
+                            <div class="col-md-10 text-left text-md-right">
+                                <p class='font-weight-light font-italic'><%= transaction.notes %></p>
+                            </div>
+                        </div>
+        
+                        <div class="row">
+                            <div class="col-md-1">
+                                <p class='font-weight-bold'>Date</p>
+                            </div>
+                            <div class="col-md-11 text-left text-md-right">
+                                <p><%= transaction.fullDate %></p>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
         </div>
     </div>
+
     <div class="row">
         <div id='payment' class="col">
             <p>Message and Notes</p>
         </div>
     </div>
-    <a href='/account/transaction' class='btn btn-lg btn-primary'>Payment</a>
+    <a href='/account/transaction' class='btn btn-md btn-primary'>Make a Payment</a>
 </div>
+
+
 
 
 

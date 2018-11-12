@@ -1,10 +1,13 @@
 <h1>Make a transaction</h1>
 <form action="/account" method="POST">
-    <input type="number" name="amount" placeholder="amount">
-    <input type="text" name="currency" placeholder="currency">
-    <input type="hidden" name="sender" value='<%= currentUser._id %>''>
-    <input type="text" name="receiver" placeholder='receiver'>
-    <input type="text" name="date" value= '<%= new Date() %>' readonly>
-    <input type="text" name="notes" placeholder="notes">
+    <input type="number" name="amount" placeholder="amount" required>
+    <input type="text" name="currency" placeholder="currency" required>
+    <input type="text" name="date" value='<%= new Date().toLocaleString().split(',')[0] %>' readonly>
+    <input type="text" name="to" placeholder='receiver' required>
+    <input type="text" maxlength="60" name="notes" placeholder="notes">
+    <!-- When add is clicked, set short hand date -->
+    <input type="hidden" name="from" value='<%= currentUser._id %>''>
+    <input type="hidden" name="fullDate" value= '<%= new Date() %>'>
+
     <input type="submit" value="Add">
 </form>

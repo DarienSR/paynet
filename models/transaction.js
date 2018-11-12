@@ -2,11 +2,12 @@
 var mongoose = require('mongoose');
 
 var TransactionSchema = new mongoose.Schema({
-    receiver: String,
-    sender: String,
+    to: String,
+    from: String,
     amount: Number,
     currency: String,
     date: String,
+    fullDate: String,
     notes: String
 });
 
