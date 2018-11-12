@@ -7,7 +7,9 @@ Transaction = require('../models/transaction');
 
 // NEW ROUTE 
 router.get("/account/transaction", function(req, res){
-    res.render("transaction");
+    User.find({}, function(err, allUsers){
+        res.render("transaction", {allUsers: allUsers});
+    });
 });
 
 router.post('/account', function(req, res){
@@ -39,6 +41,7 @@ router.post('/account', function(req, res){
                 fullDate: getFullDate,
                 notes: getNotes
             }
+
             User.findById(req.user._id, function(err, user){
                 if(err){
                     console.log(err)
@@ -57,7 +60,7 @@ router.post('/account', function(req, res){
             });
         
             // Send payment to receiver and store in their transaction history
-            User.findById(getTo, function(err, toUser){
+            User.findById(getTo || username, function(err, toUser){
                 if(err){
                     console.log(err)
                 } else {

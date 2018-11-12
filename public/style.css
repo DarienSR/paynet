@@ -16,6 +16,47 @@
     letter-spacing: 0.75px;
 }
 
+#amount {
+    height: 150px;
+    width: 250px;
+    font-size: 4rem;
+}
+
+#date {
+    width: 165px;
+}
+
+#to {
+    width: 250px;
+    margin-left: 10px;
+}
+
+#notes {
+    width: 250px;
+    margin-left: 10px;
+    resize: none;
+}
+
+#createTransaction {
+    padding: 2px 0;
+    width: 250px;
+    margin-left: 12px;
+}
+
+#currency {
+    position: relative;
+    width: 75px;
+    top: 25px;
+    right: 170px;
+}
+
+.fa-dollar-sign {
+    position: relative;
+    left: 80px;
+    bottom: 45px;
+}
+
+
 /* Scroll Bar */
 
 #transactionHistory {
