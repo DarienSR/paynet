@@ -1,3 +1,18 @@
+body, html {
+    height: 100%
+}
+
+.color {
+    background: rgba(141, 3, 3, 0.384);
+}
+
+.toggleSize {
+    font-size: 1.5rem;
+}
+
+i {
+    color: black;
+}
 .navbar.scrolled {
     background: rgb(122, 23, 189);
     transition: background 500ms;
@@ -5,59 +20,41 @@
 
 .positive {
     background: rgba(96, 238, 96, 0.493);
+    margin-bottom: 5px;
+}
+
+.positiveLast {
+    background: rgba(96, 238, 96, 0.493);
 }
 
 .negative {
     background: rgba(219, 57, 57, 0.616);
+    margin-bottom: 5px;
 }
 
-.transactionInfo {
-    border-bottom: solid 1px black;
+.negativeLast {
+    background: rgba(219, 57, 57, 0.616);
+}
+
+.letterSpacing {
     letter-spacing: 0.75px;
 }
 
-#amount {
-    height: 150px;
-    width: 250px;
-    font-size: 4rem;
-}
-
-#date {
-    width: 165px;
-}
-
-#to {
-    width: 250px;
-    margin-left: 10px;
-}
-
-#notes {
-    width: 250px;
-    margin-left: 10px;
-    resize: none;
-}
 
 #createTransaction {
-    padding: 2px 0;
-    width: 250px;
-    margin-left: 12px;
+    color: black;
 }
 
-#currency {
-    position: relative;
-    width: 75px;
-    top: 25px;
-    right: 170px;
+#userList {
+    text-decoration: underline;
 }
-
-.fa-dollar-sign {
-    position: relative;
-    left: 80px;
-    bottom: 45px;
-}
-
-
 /* Scroll Bar */
+
+#userListScroll {
+    overflow: scroll;
+    width: 100%;
+    height: 250px;
+}
 
 #transactionHistory {
     overflow: scroll;

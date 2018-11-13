@@ -12,11 +12,14 @@ router.get("/account", function(req, res){
         if(err){
             console.log(err);
         } else {
-            var balance = user.balance;
+            var balanceCAD = user.balanceCAD;
+            var balanceUSD = user.balanceUSD;
             var userTransaction = user.transactionHistory;
-            res.render("account", {userTransaction: userTransaction, balance: balance});
+            User.find({}, function(err, allUsers){
+                res.render("account", {allUsers: allUsers, userTransaction: userTransaction, balanceCAD: balanceCAD, balanceUSD: balanceUSD}); 
+            }); 
         }
-    });      
+    });     
 }); 
 
 module.exports = router;

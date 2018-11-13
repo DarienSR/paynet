@@ -5,7 +5,8 @@ var UserSchema = new mongoose.Schema({
     username: String,
     password: String,
     //  NOTE: Add total Balance and option for different currencies later. When creating an account set balance to 0
-    balance: Number,
+    balanceCAD: Number,
+    balanceUSD: Number,
     transactionHistory: [
         {
         type: mongoose.Schema.Types.ObjectId,

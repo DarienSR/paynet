@@ -26,10 +26,9 @@ router.post('/account', function(req, res){
         res.redirect('/account')   
     } else {
         // another if statement to see if user has enough cash to cover.
-        if(req.user.balance < getAmount) {
-            // CHANGE TO ERROR FLASH
-            console.log('You do not have enough to cover this transaction.')
-            res.redirect('/account')   
+        if(req.user.balanceCAD < getAmount || req.user.balanceUSD < getAmount){
+            console.log('You do not have enough to cover this transaction ('+getCurrency+')');
+            res.redirect('/account');
         } else {
             // Proceed with the transaction. Storing the pulled form information into an object
             var transactionObject = {
@@ -52,7 +51,11 @@ router.post('/account', function(req, res){
                         } else {
                             // Save to user's transaction history
                             user.transactionHistory.push(addTransaction);
-                            user.balance -= addTransaction.amount;
+                            if(addTransaction.currency == 'CAD'){
+                                user.balanceCAD -= addTransaction.amount;
+                            } else {
+                                user.balanceUSD -= addTransaction.amount;
+                            }
                             user.save();
                         }
                      });
@@ -69,7 +72,11 @@ router.post('/account', function(req, res){
                             console.log(err)
                         } else {
                             toUser.transactionHistory.push(sendPayment);
-                            toUser.balance += sendPayment.amount;
+                            if(sendPayment.currency == 'CAD'){
+                                toUser.balanceCAD += sendPayment.amount;
+                            } else {
+                                toUser.balanceUSD += sendPayment.amount;
+                            }
                             toUser.save();
                         }
                     });
