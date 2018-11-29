@@ -6,7 +6,7 @@ Transaction = require('../models/transaction');
 
 
 // NEW ROUTE 
-router.get("/account/transaction", function(req, res){
+router.get("/account/transaction", isLoggedIn, function(req, res){
     User.find({}, function(err, allUsers){
         res.render("transaction", {allUsers: allUsers});
     });
@@ -23,12 +23,13 @@ router.post('/account', function(req, res){
 
     // if user is sending money to himself, cancel payment and redirect to account page
     if(getTo == req.user._id) {
-        res.redirect('/account')   
+        req.flash('error', 'User ID belongs to current account.')
+        res.redirect('/account/transaction')   
     } else {
         // another if statement to see if user has enough cash to cover.
         if(req.user.balanceCAD < getAmount || req.user.balanceUSD < getAmount){
-            console.log('You do not have enough to cover this transaction ('+getCurrency+')');
-            res.redirect('/account');
+            req.flash('error', 'You do not have enough to cover this transaction ('+getCurrency+')');
+            res.redirect('/account/transaction');
         } else {
             // Proceed with the transaction. Storing the pulled form information into an object
             var transactionObject = {
@@ -83,7 +84,15 @@ router.post('/account', function(req, res){
                 }
             });
         }     
+        req.flash('success', 'Payment has been sent!')
         res.redirect('/account')   
     }
 });
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+};
 module.exports = router;

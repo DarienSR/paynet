@@ -7,7 +7,7 @@ Transaction = require('../models/transaction');
 
 // INDEX ROUTE
 
-router.get("/account", function(req, res){
+router.get("/account", isLoggedIn, function(req, res){
     User.findById(req.user._id).populate('transactionHistory').exec(function(err, user){
         if(err){
             console.log(err);
@@ -22,6 +22,13 @@ router.get("/account", function(req, res){
     });     
 }); 
 
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+};
 module.exports = router;
 
 

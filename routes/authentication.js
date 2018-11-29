@@ -15,11 +15,12 @@ router.post("/register", function(req, res){
 
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-            console.log(err);
+            req.flash('error', err.message)
             return res.redirect('/register');
         }
         passport.authenticate("local")(req, res, function(){
-           res.redirect("/account"); 
+            req.flash('success', 'Welcome to Paynet, ' + req.body.username +'!')
+            res.redirect("/account"); 
         });
     });
 });
@@ -44,3 +45,4 @@ router.get("/logout", function(req, res){
 });
 
 module.exports = router;
+

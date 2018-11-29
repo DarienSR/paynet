@@ -1,8 +1,8 @@
 <% include ../partials/header %>
 
-<div class="container">
+<div class="container pt-5">
     <div class="row color">
-        <div id='balance' class="col border-right border-light m-3">
+        <div id='balance' class="col m-3">
             <div class="col p-0">
                 <h2 class='border-bottom border-dark pb-2'><%= currentUser.username %></h2>
             </div>
@@ -10,7 +10,7 @@
                 <div class="col-6">
                     <h5>User ID</h5>
                 </div>
-                <div class="col-6 font-italic">
+                <div class="col-md-12 col-lg-6 font-italic">
                     <p><%= currentUser._id %></p>
                 </div>
             </div>
@@ -33,20 +33,25 @@
 
             <h5 class='mt-3' id='userList'>List of Users</h5>
             <div id='userListScroll' class="col p-0">
+                <% var x = 0 %>
                 <% allUsers.forEach(function(user){ %>
                     <div class="row mb-2">
-                        <div class="col-6 font-weight-bold">
+                        <div class="col-12 col-xl-6 font-weight-bold">
                             <%= user.username %>
                         </div>
-                        <div class="col-6 font-italic">
-                            <%= user._id %>
+                        <div class="col-10 col-xl-5 font-italic">
+                            <p id='allIDs' class='copyID<%=x%> m-0 border-0'><%= user._id %></p>
+                        </div>
+                        <div class="col-1 col-xl-1">
+                            <i data-clipboard-target=".copyID<%=x%>" class="fa fa-copy btnClip"></i>
                         </div>
                     </div>
+                    <% x += 1 %>
                 <% }); %>
             </div>
         </div>
 
-        <div id='transactionHistory' class="col-md-6">
+        <div id='transactionHistory' class="col-md-6 mr-3">
             <h2 class='text-center m-3 pb-2 border-bottom border-dark'>Transaction History</h2>
    
             <div class="spacing">
@@ -55,30 +60,30 @@
                     <% userTransaction.forEach(function(transaction){ %>
                         <% if(transaction.to == currentUser._id) { %>
                             <div class="row positive">
-                                <div class="col-4">
+                                <div class="col-5">
                                     <p class="font-weight-bold font-italic m-2">+ $<%= transaction.amount%> <%= transaction.currency %></p>
                                 </div>
-                                <div class="col-4 text-center">
+                                <div class="col-2 text-center">
                                     <span class='toggleSize' data-toggle='collapse' data-target='#showTransaction<%=i%>' role='button' aria-expanded="false" aria-controls='showTransaction'>
                                         <a href='#'><i class="showInfo fas fa-plus"></i></a>
                                     </span>
                                 </div>
-                                <div class="col-4 text-right">
+                                <div class="col-5 text-right">
                                     <p class='m-2'><%= transaction.date %></p>
                                 </div>
                             </div>
                                 
                         <% } else { %>
                             <div class="row negative">
-                                <div class="col-4">
+                                <div class="col-5">
                                     <p class="font-weight-bold font-italic p-0 m-2">- $<%= transaction.amount %> <%= transaction.currency %></p>
                                 </div>
-                                <div class="col-4 text-center">
+                                <div class="col-2 text-center">
                                     <span class='toggleSize' data-toggle='collapse' data-target='#showTransaction<%=i%>' role='button' aria-expanded="false" aria-controls='showTransaction'>
                                         <a href='#'><i class="showInfo fas fa-plus"></i></a>
                                     </span>
                                 </div>
-                                <div class="col-4 text-right">
+                                <div class="col-5 text-right">
                                     <p class='p-0 m-2'><%= transaction.date %></p>
                                 </div>
                             </div>        
@@ -142,7 +147,10 @@
     </div>
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+    new ClipboardJS('.btnClip');
+</script>
 
 
 

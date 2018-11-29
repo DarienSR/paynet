@@ -1,6 +1,28 @@
-<h1>Register</h1>
-<form action="/register" method="POST">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <input type="submit" value="Register">
-</form>
+<% include ../partials/LoginReg %>
+
+<div id="background">
+    <div class="container">
+        <div class="row">
+            <div class='col-md-4'></div>
+            <div id='formStyle' class="col-md-4">
+                <h1>Register</h1>
+                <form action='/register' method='POST' id="register">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name='username' placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name='password' placeholder="Password">
+                    </div>
+                    <!-- <div class="forgot">
+                    <a href="#">Forgot password?</a>
+                    </div> -->
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <a href='/login'><p id='createAccount'>Already have an account?</p></a>
+                </form>          
+            </div>
+            <div class='col-md-4'></div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

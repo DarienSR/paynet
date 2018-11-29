@@ -1,14 +1,14 @@
 <% include ../partials/header %>
 
-<div class="container">
+<div class="pt-5 container">
     <div class="row justify-content-center">
-        <div class="col-6">
-            <div class="card">
-                <h5 class="card-header info-color white-text text-center py-4">
+        <div class="col-12 col-md-6 pt-5 mt-5">
+            <div class="card mt-5">
+                <h5 class="card-header white-text text-center py-4">
                     <strong>Payment</strong>
                 </h5>
                 <div class="card-body px-lg-5 pt-0">
-                    <form action='/account' method='POST' class="text-center mt-3" style="color: #757575;">
+                    <form action='/account' method='POST' class="text-center mt-3">
                         <div class="form-row">
                             <div class="col input-group mb-3">
                                 <div class="input-group-prepend">
@@ -32,8 +32,8 @@
                             <input id="notes" class='form-control' type="text" maxlength="60" name="notes" placeholder="Add a Note!">
                         </div>
                         
-                        <button id='createTransaction' class="btn bg-warning btn-outline-warning btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Make a Payment</button>
-                    
+                        <button id='createTransaction' class="btn bg-warning btn-outline-warning btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Confirm</button>
+                        <a id='backButton' href="/account">Back</a>
                         <input type="hidden" name="from" value='<%= currentUser._id %>''>
                         <input type="hidden" name="fullDate" value= '<%= new Date() %>'>
                         <input type="hidden" name="date" value='<%= new Date().toLocaleString().split(',')[0] %>'>

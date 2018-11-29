@@ -1,0 +1,56 @@
+body{
+    background: linear-gradient(to right, #4b51a7, #05afe1, #fc4546);
+}
+
+.navbar-dark .navbar-nav .nav-link, .navbar-dark .navbar-brand {
+    color:black;
+} 
+
+.navbar-default {
+border: none;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand{
+color: white;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+color: rgb(201, 26, 26);
+text-decoration: underline;
+}
+
+.navbar-default .navbar-nav>li>a:active {
+color: white;
+}
+
+.navbar-default .navbar-brand:hover {
+color: white;
+}
+
+#formStyle button {
+margin-top: 10px;
+width: 100%;
+}
+#formStyle h1{
+color: white;
+text-decoration: underline;
+}
+
+input.form-control {
+border: 2px solid white;
+}
+
+#formStyle {
+margin-top: 25vh;
+padding: 10px;
+}
+
+.paddingAlert {
+margin-top: 70px;
+}
+
+#createAccount {
+padding-top: 15px;
+text-align: right;
+color: white;
+}
