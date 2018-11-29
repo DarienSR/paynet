@@ -60,7 +60,7 @@
                     <% userTransaction.forEach(function(transaction){ %>
                         <% if(transaction.to == currentUser._id) { %>
                             <div class="row positive">
-                                <div class="col-5">
+                                <div class="col-5 p-0 m-0">
                                     <p class="font-weight-bold font-italic m-2">+ $<%= transaction.amount%> <%= transaction.currency %></p>
                                 </div>
                                 <div class="col-2 text-center">
@@ -75,7 +75,7 @@
                                 
                         <% } else { %>
                             <div class="row negative">
-                                <div class="col-5">
+                                <div class="col-5 p-0 m-0">
                                     <p class="font-weight-bold font-italic p-0 m-2">- $<%= transaction.amount %> <%= transaction.currency %></p>
                                 </div>
                                 <div class="col-2 text-center">
