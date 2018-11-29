@@ -19,7 +19,7 @@
                     <h6>Total Balance (CAD)</h5>
                 </div>
                 <div class="col-6">
-                    <p>$<%= balanceCAD %></p>
+                    <p>$<%= parseFloat(Math.round(balanceCAD * 100) / 100).toFixed(2); %></p>
                 </div>
             </div>
             <div class="row">
@@ -27,7 +27,7 @@
                     <h6>Total Balance (USD)</h5>
                 </div>
                 <div class="col-6">
-                    <p>$<%= balanceUSD %></p>
+                    <p>$<%= parseFloat(Math.round(balanceUSD * 100) / 100).toFixed(2); %></p>
                 </div>
             </div>
 
