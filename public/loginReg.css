@@ -1,5 +1,5 @@
 body{
-    background: linear-gradient(to right, #4b51a7, #05afe1, #fc4546);
+    background: linear-gradient(#05afe1);
 }
 .navbar-dark .navbar-nav .nav-link, .navbar-dark .navbar-brand {
     color:black;
