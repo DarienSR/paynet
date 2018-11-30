@@ -2,7 +2,8 @@ body, html {
     height: 100%;
     /* background:rgba(49, 76, 230, 0.384);
     background: linear-gradient(to bottom, #449fab, #e361bd, #f3c4cf); */
-    background: #3cafe8;
+ 
+        background: linear-gradient(26deg, #1493df, #aba9db, #c17077);
     /* background: linear-gradient(96deg, #343867, #05afe1, #fc4546); */
 }
 
@@ -69,9 +70,14 @@ i {
     color: black;
 }
 
-#userList {
+#userList, #currentBalanceText {
     text-decoration: underline;
 }
+
+#currentBalance, #currentBalanceText {
+    font-size: 0.75rem;
+}
+
 /* Scroll Bar */
 
 #userListScroll {
@@ -110,12 +116,21 @@ background: #244e74;
     padding-right: 5px;
 }
 
+.padding {
+    padding-top: 100px;
+}
 
+#alert {
+    padding-top: 50px;
+}
 
-/* Small Devices, Tablets */
-@media only screen and (min-width : 768px) {
-    body {
-        background: linear-gradient(26deg, #1493df, #aba9db, #c17077);
+/*  extra Small Devices, Tablets */
+@media only screen and (min-width : 360px) {
+    body, html {
+        background: #3cafe8;
+    }
+    #transactionHistory {
+        margin-left: 16px;
     }
 }
 

@@ -3,7 +3,9 @@ var mongoose = require('mongoose');
 
 var TransactionSchema = new mongoose.Schema({
     to: String,
+    toUsername: String,
     from: String,
+    fromUsername: String,
     amount: Number,
     currency: String,
     date: String,

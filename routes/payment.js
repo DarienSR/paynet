@@ -15,8 +15,12 @@ router.get("/account/transaction", isLoggedIn, function(req, res){
 router.post('/account', function(req, res){
     var getAmount = req.body.amount;  
     var getCurrency = req.body.currency;
-    var getTo = req.body.to;
+    var pullGetTo =  req.body.to;
+    var l = pullGetTo.split(',')
+    var getTo = l[0];
+    var getToUsername = l[1]
     var getFrom = req.body.from;
+    var getFromUsername = req.body.fromUsername;
     var getDate = req.body.date;
     var getFullDate = req.body.fullDate
     var getNotes = req.body.notes;
@@ -36,7 +40,9 @@ router.post('/account', function(req, res){
                 amount: getAmount,
                 currency: getCurrency,
                 to: getTo,
+                toUsername: getToUsername,
                 from: getFrom,
+                fromUsername: getFromUsername,
                 date: getDate,
                 fullDate: getFullDate,
                 notes: getNotes
