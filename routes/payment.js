@@ -13,24 +13,27 @@ router.get("/account/transaction", isLoggedIn, function(req, res){
 });
 
 router.post('/account', function(req, res){
-    var getAmount = req.body.amount;  
-    var getCurrency = req.body.currency;
-    var pullGetTo =  req.body.to;
-    var l = pullGetTo.split(',')
-    var getTo = l[0];
-    var getToUsername = l[1]
-    var getFrom = req.body.from;
-    var getFromUsername = req.body.fromUsername;
-    var getDate = req.body.date;
-    var getFullDate = req.body.fullDate
-    var getNotes = req.body.notes;
+    // Request user inputs
+    var getAmount   = req.body.amount,  
+    getCurrency     = req.body.currency,
+    // Gets two values and splits them into an array
+    pullGetTo       =  req.body.to.split(','),
+    // Storing each index into its own variable
+    getTo           = pullGetTo[0],
+    getToUsername   = pullGetTo[1],
+    getFrom         = req.body.from,
+    getFromUsername = req.body.fromUsername,
+    getDate         = req.body.date,
+    getFullDate     = req.body.fullDate,
+    getNotes        = req.body.notes;
+    console.log(pullGetTo)
 
-    // if user is sending money to himself, cancel payment and redirect to account page
+    // if user is sending money to himself, cancel payment and redirect to account page and display an error
     if(getTo == req.user._id) {
         req.flash('error', 'User ID belongs to current account.')
         res.redirect('/account/transaction')   
     } else {
-        // another if statement to see if user has enough cash to cover.
+        // see if user has enough cash to cover, if not redirect to the transaction page and display an error.
         if(req.user.balanceCAD < getAmount || req.user.balanceUSD < getAmount){
             req.flash('error', 'You do not have enough to cover this transaction ('+getCurrency+')');
             res.redirect('/account/transaction');

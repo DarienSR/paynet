@@ -14,14 +14,17 @@ authRoute    = require('./routes/authentication');
 accountRoute = require('./routes/account');
 paymentRoute = require('./routes/payment');
 
-// mongoose.connect('mongodb://localhost:27017/paynet', { useNewUrlParser: true});
-// var identity = 'Darien:transaction_01'
-mongoose.connect("mongodb://Darien:transaction_01@ds241493.mlab.com:41493/paynet", { useNewUrlParser: true });
+
+
+var url = process.env.DATABASEURL || 'mongodb://localhost:27017/paynet'
+mongoose.connect(url, { useNewUrlParser: true });   
+
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(flash());
+
 
 // Configuration of Passport
 app.use(require('express-session')({
@@ -55,8 +58,6 @@ app.get('*', function(req,res){
     res.redirect('/');
 });
 
-
-
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(process.env.PORT || 3000, process.env.IP, function(){
     console.log('Listening on Localhost');
 });
