@@ -4,14 +4,32 @@ router      = express.Router({mergeParams: true}),
 User        = require("../models/user");
 Transaction = require('../models/transaction');
 
+router.get("/account/transaction", isLoggedIn, function(req, res){
+    User.findById(req.user._id).populate('transactionHistory').exec(function(err, user){
+        if(err){
+            console.log(err);
+        } else {
+            var user = user
+            console.log(user)
+            User.find({}, function(err, allUsers){
+                console.log(user)
+                var allUsers = allUsers
+                console.log(allUsers)
+                res.render("transaction", {user: user, allUsers: allUsers}); 
+            }); 
+        }
+    });     
+}); 
 
-// NEW ROUTE 
+
 router.get("/account/transaction", isLoggedIn, function(req, res){
     User.find({}, function(err, allUsers){
         res.render("transaction", {allUsers: allUsers});
     });
 });
 
+
+// NEW ROUTE 
 router.post('/account', function(req, res){
     // Request user inputs
     var getAmount   = req.body.amount,  
@@ -26,7 +44,6 @@ router.post('/account', function(req, res){
     getDate         = req.body.date,
     getFullDate     = req.body.fullDate,
     getNotes        = req.body.notes;
-    console.log(pullGetTo)
 
     // if user is sending money to himself, cancel payment and redirect to account page and display an error
     if(getTo == req.user._id) {
@@ -61,7 +78,7 @@ router.post('/account', function(req, res){
                         } else {
                             // Save to user's transaction history
                             user.transactionHistory.push(addTransaction);
-                            if(addTransaction.currency == 'CAD'){
+                            if(addTransaction.currency === 'CAD'){
                                 user.balanceCAD -= addTransaction.amount;
                             } else {
                                 user.balanceUSD -= addTransaction.amount;
@@ -82,7 +99,7 @@ router.post('/account', function(req, res){
                             console.log(err)
                         } else {
                             toUser.transactionHistory.push(sendPayment);
-                            if(sendPayment.currency == 'CAD'){
+                            if(sendPayment.currency === 'CAD'){
                                 toUser.balanceCAD += sendPayment.amount;
                             } else {
                                 toUser.balanceUSD += sendPayment.amount;

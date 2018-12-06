@@ -9,7 +9,7 @@ router.get("/register", function(req, res){
     res.render("register");
 });
 
-//handle sign up logic
+// Handle sign up logic
 router.post("/register", function(req, res){
     var newUser = new User({username: req.body.username, balanceCAD: 1000, balanceUSD: 750});
 
@@ -30,7 +30,7 @@ router.get("/login", function(req, res){
    res.render("login"); 
 });
 
-//Handle login logic
+// Handle login logic
 router.post("/login", passport.authenticate("local", 
     {
         successRedirect: "/account",

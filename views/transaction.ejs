@@ -15,31 +15,40 @@
                                     <span class="input-group-text" id="basic-addon1">$</span>
                                 </div>
                                 <input id='amount' class='form-control' type="number" min='0' step="0.01" name="amount" placeholder="40" required>
-                                <select class='form-control currency' name='currency'>
+                                <select id='getCurrency' class='form-control currency' name='currency'>
                                     <option value="CAD">CAD</option>
                                     <option value="USD">USD</option>
                                 </select>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="md-form d-flex justify-content-start col-12">
-                                <p class='p-0 m-0' id='currentBalanceText'>
+                                <p class='p-0 m-0' id='currentBalanceText currentBalance'>
                                     Balance
                                 </p>
                             </div>
                 
                             <div class="md-form d-flex justify-content-start col-12">
                                 <p class='p-0 m-0' id='currentBalance'>
-                                    $<%=currentUser.balanceCAD%> CAD
+                                    
                                 </p>
                             </div>
-
-                            <div class="md-form d-flex justify-content-start col-12">
-                                <p class='p-0 m-0' id='currentBalance'>
-                                    $<%=currentUser.balanceUSD%> USD
-                                </p>
-                             </div>
                         </div>
+
+                        <script>
+                            var currentBalance = document.getElementById('currentBalance')
+                            currentBalance.textContent = '$<%= currentUser.balanceCAD %> CAD'
+                            $('#getCurrency').change(function(){
+                                getCurrency = document.getElementById('getCurrency').value
+                                if(getCurrency === 'USD'){
+                                    currentBalance.textContent = '$<%= currentUser.balanceUSD %> USD'
+                                } else {
+                                    currentBalance.textContent = '$<%= currentUser.balanceCAD %> CAD'
+                                }     
+                            });
+                        </script>
+    
 
                         <div class="md-form">
                             <label for="materialRegisterFormEmail">Users ID</label>
@@ -76,5 +85,5 @@
         </div>
     </div>
 </div>
-
+<script src='../public/javascript.js'></script>
 <% include ../partials/footer %>

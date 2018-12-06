@@ -1,6 +1,7 @@
-var express = require("express"),
+var express = require("express");
+
 //Merges params between models
-router      = express.Router({mergeParams: true}),
+router      = express.Router({mergeParams: true});
 User        = require("../models/user");
 Transaction = require('../models/transaction');
 
@@ -12,11 +13,9 @@ router.get("/account", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            var balanceCAD = user.balanceCAD;
-            var balanceUSD = user.balanceUSD;
-            var userTransaction = user.transactionHistory;
+            var user = user
             User.find({}, function(err, allUsers){
-                res.render("account", {allUsers: allUsers, userTransaction: userTransaction, balanceCAD: balanceCAD, balanceUSD: balanceUSD}); 
+                res.render("account", {user: user, allUsers: allUsers}); 
             }); 
         }
     });     

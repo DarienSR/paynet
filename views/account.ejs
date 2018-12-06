@@ -19,7 +19,7 @@
                     <h6>Total Balance (CAD)</h5>
                 </div>
                 <div class="col-6">
-                    <p>$<%= parseFloat(Math.round(balanceCAD * 100) / 100).toFixed(2); %></p>
+                    <p>$<%= parseFloat(Math.round(user.balanceCAD * 100) / 100).toFixed(2); %></p>
                 </div>
             </div>
             <div class="row">
@@ -27,28 +27,10 @@
                     <h6>Total Balance (USD)</h5>
                 </div>
                 <div class="col-6">
-                    <p>$<%= parseFloat(Math.round(balanceUSD * 100) / 100).toFixed(2); %></p>
+                    <p>$<%= parseFloat(Math.round(user.balanceUSD * 100) / 100).toFixed(2); %></p>
                 </div>
             </div>
-<!-- 
-            <h5 class='mt-3' id='userList'>List of Users</h5>
-            <div id='userListScroll' class="col p-0">
-                <% var x = 0 %>
-                <% allUsers.forEach(function(user){ %>
-                    <div class="row mb-2">
-                        <div class="col-12 col-xl-6 font-weight-bold">
-                            <%= user.username %>
-                        </div>
-                        <div class="col-10 col-xl-5 font-italic">
-                            <p id='allIDs' class='copyID<%=x%> m-0 border-0'><%= user._id %></p>
-                        </div>
-                        <div class="col-1 col-xl-1">
-                            <i data-clipboard-target=".copyID<%=x%>" class="fa fa-copy btnClip"></i>
-                        </div>
-                    </div>
-                    <% x += 1 %>
-                <% }); %>
-            </div> -->
+
         </div>
 
         <div id='transactionHistory' class="col-md-6 mr-3">
@@ -57,7 +39,7 @@
             <div class="spacing">
                 <div class="justify-content-middle">
                         <% var i = 0 %>
-                    <% userTransaction.forEach(function(transaction){ %>
+                    <% user.transactionHistory.forEach(function(transaction){ %>
                         <% if(transaction.to == currentUser._id) { %>
                             <div class="row positive">
                                 <div class="col-5 p-0 m-0">
