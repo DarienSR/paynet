@@ -10,9 +10,10 @@ User           = require('./models/user');
 Transaction    = require('./models/transaction');
 
 // Requiring Routes
-authRoute    = require('./routes/authentication');
-accountRoute = require('./routes/account');
-paymentRoute = require('./routes/payment');
+authRoute     = require('./routes/authentication');
+accountRoute  = require('./routes/account');
+paymentRoute  = require('./routes/payment');
+transferRoute = require('./routes/transfer')
 
 
 
@@ -53,6 +54,7 @@ app.get('/', function(req, res){
 app.use(authRoute);
 app.use(accountRoute);
 app.use(paymentRoute)
+app.use(transferRoute)
 
 app.get('*', function(req,res){
     res.redirect('/');

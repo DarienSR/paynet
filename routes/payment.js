@@ -10,11 +10,8 @@ router.get("/account/transaction", isLoggedIn, function(req, res){
             console.log(err);
         } else {
             var user = user
-            console.log(user)
             User.find({}, function(err, allUsers){
-                console.log(user)
                 var allUsers = allUsers
-                console.log(allUsers)
                 res.render("transaction", {user: user, allUsers: allUsers}); 
             }); 
         }
