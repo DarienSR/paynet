@@ -42,9 +42,9 @@
                             $('#getCurrency').change(function(){
                                 getCurrency = document.getElementById('getCurrency').value
                                 if(getCurrency === 'USD'){
-                                    currentBalance.textContent = '$<%= currentUser.balanceUSD %> USD'
+                                    currentBalance.textContent = '$<%= parseFloat(Math.round(currentUser.balanceUSD * 100) / 100).toFixed(2) %> USD'
                                 } else {
-                                    currentBalance.textContent = '$<%= currentUser.balanceCAD %> CAD'
+                                    currentBalance.textContent = '$<%= parseFloat(Math.round(currentUser.balanceCAD * 100) / 100).toFixed(2) %> CAD'
                                 }     
                             });
                         </script>

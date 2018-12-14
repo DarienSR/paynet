@@ -27,7 +27,7 @@ router.get("/account/transaction", isLoggedIn, function(req, res){
 
 
 // NEW ROUTE 
-router.post('/account', function(req, res){
+router.post('/account', isLoggedIn, function(req, res){
     // Request user inputs
     var getAmount   = req.body.amount,  
     getCurrency     = req.body.currency,
@@ -48,7 +48,7 @@ router.post('/account', function(req, res){
         res.redirect('/account/transaction')   
     } else {
         // see if user has enough cash to cover, if not redirect to the transaction page and display an error.
-        if(req.user.balanceCAD < getAmount || req.user.balanceUSD < getAmount){
+        if(getCurrency === 'CAD' && req.user.balanceCAD < getAmount || getCurrency === 'USD' && req.user.balanceUSD < getAmount){
             req.flash('error', 'You do not have enough to cover this transaction ('+getCurrency+')');
             res.redirect('/account/transaction');
         } else {

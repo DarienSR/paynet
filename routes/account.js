@@ -9,7 +9,7 @@ Transaction = require('../models/transaction');
 // INDEX ROUTE
 
 router.get("/account", isLoggedIn, function(req, res){
-    User.findById(req.user._id).populate('transactionHistory').exec(function(err, user){
+    User.findById(req.user._id).populate('transactionHistory').populate('convertHistory').exec(function(err, user){
         if(err){
             console.log(err);
         } else {
@@ -20,6 +20,10 @@ router.get("/account", isLoggedIn, function(req, res){
         }
     });     
 }); 
+
+// Update users account if transfer occurs
+
+
 
 
 function isLoggedIn(req, res, next){

@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<div class="container pt-md-4 padding">
+<div class="container p-0 pt-md-4">
     <div class="row color">
         <div id='balance' class="col m-3">
             <div class="col p-0">
@@ -8,15 +8,7 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <h5>User ID</h5>
-                </div>
-                <div class="col-md-12 col-lg-6 font-italic">
-                    <p><%= currentUser._id %></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <h6>Total Balance (CAD)</h5>
+                    <h6>Total Balance (CAD)</h6>
                 </div>
                 <div class="col-6">
                     <p>$<%= parseFloat(Math.round(user.balanceCAD * 100) / 100).toFixed(2); %></p>
@@ -24,39 +16,133 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <h6>Total Balance (USD)</h5>
+                    <h6>Total Balance (USD)</h6>
                 </div>
                 <div class="col-6">
                     <p>$<%= parseFloat(Math.round(user.balanceUSD * 100) / 100).toFixed(2); %></p>
                 </div>
             </div>
+            <form action="/account/convert" method='POST'>
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class='text-center pt-1'>Exchange Currency</h5>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-row">
+                            <div class="col-12 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text dark" id="basic-addon1">$</span>
+                                </div>
+                                <input id='amountFirstTransfer' class='form-control dark' type="number" min='0' step="0.01" value='' name="amountFirstTransfer" placeholder="0" required>
+                                <select id='getFirstCurrency' class='form-control pl-2 currency dark' name='firstCurrency'>
+                                    <option class='dark' value="CAD">CAD</option>
+                                    <option class='dark' value="USD">USD</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
+
+                        <span class="input-group-text paddingLeft p-2" id="basic-addon1">
+                            <i class="fas fa-arrow-down"></i>
+                        </span>
+
+                
+                    <div class="col-12">
+                        <div class="form-row">
+                            <div class="col-12 input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text dark" id="basic-addon1">$</span>
+                                </div>
+                                <input id='amountSecondTransfer' class='form-control dark' type="number" min='0' step="0.01" name="amountSecondTransfer" value="0"  readonly>
+                                <input id='getSecondCurrency' class='form-control currency pl-2 dark' name='secondCurrency' value='USD' readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 p-0 m-0">
+                        <div id='payment' class="col text-right">
+                            <button class='btn btn-md btn-dark'>Convert</button>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="date" value='<%= new Date().toLocaleString().split(',')[0] %>'>
+            </form>
+
+            <div class="col-md-12 p-1 m-0">
+                <h5 class='text-center'>Exchange History</h5>
+        
+                <div id='ExchangeHistory' class='p-0 pr-3'>
+                        <% var i = 0 %>
+                    <% user.convertHistory.forEach(function(convert){ %>
+                            <div class="row exchange m-1">
+                                <div class="col-5 m-0 p-0">
+                                    <% if(convert.initialAmount === 'CAD') { %>
+                                        <p class="font-weight-bold font-italic m-2">+ $<%= parseFloat(Math.round(convert.initialAmount * 100) / 100).toFixed(2)%> <%= convert.initialCurrency %></p>
+                                    <% } else { %>
+                                        <p class="font-weight-bold font-italic m-2">+ $<%= parseFloat(Math.round(convert.endAmount * 100) / 100).toFixed(2)%> <%= convert.endCurrency %></p>
+                                    <% } %> 
+                                </div>
+                                <div class="col-2 text-center m-0 p-0">
+                                    <span class='toggleSize' data-toggle='collapse' data-target='#showExchange<%=i%>' role='button' aria-expanded="false" aria-controls='showExchange'>
+                                        <a href='#'><i class="fas fa-plus"></i></a>
+                                    </span>
+                                </div>
+                                <div class="col-5 text-right m-0 p-0">
+                                    <p class="font-weight-bold font-italic m-2"><%=convert.date%></p>
+                                </div>
+                            </div>
+                                
+                        <!-- Ability to pull down more information  ADD FEATURE-->
+
+                        <div class='collapse p-2' id='showExchange<%=i%>'>
+                            <p class='text-center letterSpacing mt-2'>Exchange Information</p>
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <p class='font-weight-bold'>Exchanged</p>
+                                    </div>
+                                    <div class="col-md-6 text-left text-md-right">
+                                        <p>- $<%= parseFloat(Math.round(convert.initialAmount * 100) / 100).toFixed(2) %> <%= convert.initialCurrency %></p>
+                                    </div>   
+                                    <div class="col-md-6">
+                                        <p class='font-weight-bold'>Received</p>
+                                    </div>
+                                    <div class="col-md-6 text-left text-md-right">
+                                        <p>+ $<%= parseFloat(Math.round(convert.endAmount * 100) / 100).toFixed(2) %> <%= convert.endCurrency %></p>
+                                    </div>    
+                            </div>
+                    </div>
+                    <% i += 1 %>
+                    <% }); %>
+                </div>
+            </div>
         </div>
 
-        <div id='transactionHistory' class="col-md-6 mr-3">
-            <h2 class='text-center m-3 pb-2 border-bottom border-dark'>Transaction History</h2>
+        <div class="col-md-6 p-0">
+            <h2 class='text-center mt-3 pb-2 border-bottom border-dark'>Transaction History</h2>
    
-            <div class="spacing">
+            <div id='transactionHistory' class='m-0 pr-1'>
                 <div class="justify-content-middle">
                         <% var i = 0 %>
                     <% user.transactionHistory.forEach(function(transaction){ %>
                         <% if(transaction.to == currentUser._id) { %>
-                            <div class="row positive">
+                            <div class="row positive p-0 m-3">
                                 <div class="col-5 p-0 m-0">
                                     <p class="font-weight-bold font-italic m-2">+ $<%= transaction.amount%> <%= transaction.currency %></p>
                                 </div>
-                                <div class="col-2 text-center">
+                                <div class="col-2 text-center p-0 m-0">
                                     <span class='toggleSize' data-toggle='collapse' data-target='#showTransaction<%=i%>' role='button' aria-expanded="false" aria-controls='showTransaction'>
                                         <a href='#'><i class="showInfo fas fa-plus"></i></a>
                                     </span>
                                 </div>
-                                <div class="col-5 text-right">
+                                <div class="col-5 text-right p-0 m-0">
                                     <p class='m-2'><%= transaction.date %></p>
                                 </div>
                             </div>
                                 
                         <% } else { %>
-                            <div class="row negative">
+                            <div class="row negative p-0 m-3">
                                 <div class="col-5 p-0 m-0">
                                     <p class="font-weight-bold font-italic p-0 m-2">- $<%= transaction.amount %> <%= transaction.currency %></p>
                                 </div>
@@ -65,7 +151,7 @@
                                         <a href='#'><i class="showInfo fas fa-plus"></i></a>
                                     </span>
                                 </div>
-                                <div class="col-5 text-right">
+                                <div class="col-5 p-0 m-0 text-right">
                                     <p class='p-0 m-2'><%= transaction.date %></p>
                                 </div>
                             </div>        
@@ -73,7 +159,7 @@
         
                         <!-- Ability to pull down more information  ADD FEATURE-->
 
-                        <div class='collapse' id='showTransaction<%=i%>'>
+                        <div class='collapse mr-3 mt-3 ml-3 mb-0 p-0' id='showTransaction<%=i%>'>
                             <p class='text-center letterSpacing mt-2'>Transaction Information</p>
                             <div class="row">
                                 <% if(transaction.from != currentUser._id) { %>
@@ -92,39 +178,32 @@
                                     </div>    
                                 <% } %> 
                             </div>
-        
-                        <div class="row">
-                            <div class="col-md-2">
-                                <p class='font-weight-bold'>Notes</p>
+            
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <p class='font-weight-bold'>Notes</p>
+                                </div>
+                                <div class="col-md-10 text-left text-md-right">
+                                    <p class='font-weight-light font-italic'><%= transaction.notes %></p>
+                                </div>
                             </div>
-                            <div class="col-md-10 text-left text-md-right">
-                                <p class='font-weight-light font-italic'><%= transaction.notes %></p>
+            
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <p class='font-weight-bold'>Date</p>
+                                </div>
+                                <div class="col-md-11 text-left text-md-right">
+                                    <p><%= transaction.fullDate %></p>
+                                </div>
                             </div>
                         </div>
-        
-                        <div class="row">
-                            <div class="col-md-1 colorBottom">
-                                <p class='font-weight-bold'>Date</p>
-                            </div>
-                            <div class="col-md-11 text-left text-md-right">
-                                <p><%= transaction.fullDate %></p>
-                            </div>
-                        </div>
-                        <% if(transaction.to == currentUser._id) { %>
-                            <div class="row positiveLast pb-2"></div>      
-                        <% } else { %>
-                            <div class="row negativeLast pb-2"></div>
-                        <% } %>
-                    </div>
                     <% i += 1 %>
-                    <% }); %>
+                    <% }); %>             
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="color row p-4">
-        <div id='payment' class="col text-right">
-            <a href='/account/transaction' class='btn btn-md btn-dark'>Make a Payment</a>
+            <div id='payment' class="col-12 text-right mt-5">
+                <a href='/account/transaction' class='btn btn-md btn-dark'>Make a Payment</a>
+            </div>
         </div>
     </div>
 </div>

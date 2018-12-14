@@ -8,14 +8,14 @@ passport       = require('passport'),
 LocalStrategy  = require('passport-local'),
 User           = require('./models/user');
 Transaction    = require('./models/transaction');
+Convert        = require('./models/convert');
+
 
 // Requiring Routes
 authRoute     = require('./routes/authentication');
 accountRoute  = require('./routes/account');
 paymentRoute  = require('./routes/payment');
 transferRoute = require('./routes/transfer')
-
-
 
 var url = process.env.DATABASEURL || 'mongodb://localhost:27017/paynet'
 mongoose.connect(url, { useNewUrlParser: true });   
@@ -25,7 +25,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(flash());
-
 
 // Configuration of Passport
 app.use(require('express-session')({
@@ -56,9 +55,10 @@ app.use(accountRoute);
 app.use(paymentRoute)
 app.use(transferRoute)
 
-app.get('*', function(req,res){
-    res.redirect('/');
+app.get('*', function(req, res){
+    res.redirect('/account');
 });
+
 
 app.listen(process.env.PORT || 3000, process.env.IP, function(){
     console.log('Listening on Localhost');
