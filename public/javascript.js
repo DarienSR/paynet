@@ -10,12 +10,12 @@ $('.showInfo').click(function(){
     $(this).toggleClass('fa-minus')
 });
 
-$('.btnClip').mouseover(function(){
-    $(this).addClass('changeCopyColor')
-});
-$('.btnClip').mouseleave(function(){
-    $(this).removeClass('changeCopyColor')
-});
+// $('.btnClip').mouseover(function(){
+//     $(this).addClass('changeCopyColor')
+// });
+// $('.btnClip').mouseleave(function(){
+//     $(this).removeClass('changeCopyColor')
+// });
 
 // Transfer Capabilities
 $('#getFirstCurrency').change(function(){

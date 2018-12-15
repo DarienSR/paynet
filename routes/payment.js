@@ -112,6 +112,7 @@ router.post('/account', isLoggedIn, function(req, res){
     }
 });
 
+
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();

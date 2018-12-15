@@ -38,7 +38,7 @@
 
                         <script>
                             var currentBalance = document.getElementById('currentBalance')
-                            currentBalance.textContent = '$<%= currentUser.balanceCAD %> CAD'
+                            currentBalance.textContent = '$<%= parseFloat(Math.round(currentUser.balanceCAD * 100) / 100).toFixed(2) %> CAD'
                             $('#getCurrency').change(function(){
                                 getCurrency = document.getElementById('getCurrency').value
                                 if(getCurrency === 'USD'){

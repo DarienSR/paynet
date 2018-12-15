@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="col-2 text-center m-0 p-0">
                                     <span class='toggleSize' data-toggle='collapse' data-target='#showExchange<%=i%>' role='button' aria-expanded="false" aria-controls='showExchange'>
-                                        <a href='#'><i class="fas fa-plus"></i></a>
+                                        <a href='#'><i class="fas fa-plus showInfo"></i></a>
                                     </span>
                                 </div>
                                 <div class="col-5 text-right m-0 p-0">
@@ -112,6 +112,13 @@
                                         <p>+ $<%= parseFloat(Math.round(convert.endAmount * 100) / 100).toFixed(2) %> <%= convert.endCurrency %></p>
                                     </div>    
                             </div>
+                            <div class='text-right'>
+                                <form id="delete" action="/account/convert/<%= convert._id %>?_method=DELETE" method="POST">
+                                    <span>
+                                        <button class='trashButton' title='Delete' href='#'><i class="far fa-trash-alt text-right trash"></i></button> 
+                                    </span>
+                                </form>
+                            </div>
                     </div>
                     <% i += 1 %>
                     <% }); %>
@@ -122,7 +129,7 @@
         <div class="col-md-6 p-0">
             <h2 class='text-center mt-3 pb-2 border-bottom border-dark'>Transaction History</h2>
    
-            <div id='transactionHistory' class='m-0 pr-1'>
+            <div id='transactionHistory' class=''>
                 <div class="justify-content-middle">
                         <% var i = 0 %>
                     <% user.transactionHistory.forEach(function(transaction){ %>
@@ -195,6 +202,14 @@
                                 <div class="col-md-11 text-left text-md-right">
                                     <p><%= transaction.fullDate %></p>
                                 </div>
+                            </div>
+
+                            <div class='text-right'>
+                                <form id="delete" action="/account/transaction/<%= transaction._id %>?_method=DELETE" method="POST">
+                                    <span>
+                                        <button class='trashButton' title='Delete' href='#'><i class="far fa-trash-alt text-right trash"></i></button> 
+                                    </span>
+                                </form>
                             </div>
                         </div>
                     <% i += 1 %>

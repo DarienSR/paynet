@@ -21,10 +21,28 @@ router.get("/account", isLoggedIn, function(req, res){
     });     
 }); 
 
-// Update users account if transfer occurs
 
+router.delete('/account/transaction/:id', isLoggedIn, function(req, res){
+    Transaction.findByIdAndRemove(req.params.id, function(err){
+        if(err) {
+            console.log(err)
+        } else {
+            req.flash('success', 'Your transaction entry has been deleted.')
+            res.redirect('/account')
+        }
+    });
+});
 
-
+router.delete('/account/convert/:id', isLoggedIn, function(req, res){
+    Convert.findByIdAndRemove(req.params.id, function(err){
+        if(err) {
+            console.log(err)
+        } else {
+            req.flash('success', 'Your exchange entry has been deleted.')
+            res.redirect('/account')
+        }
+    });
+});
 
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
