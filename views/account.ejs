@@ -1,24 +1,24 @@
 <% include ../partials/header %>
 
-<div class="container p-0 pt-md-4">
+<div class="container spacingP">
     <div class="row color">
         <div id='balance' class="col m-3">
             <div class="col p-0">
-                <h2 class='border-bottom border-dark pb-2'><%= currentUser.username %></h2>
+                <h2 class='font-weight-bold border-bottom border-dark pb-2'><%= currentUser.username %></h2>
             </div>
             <div class="row">
                 <div class="col-6">
-                    <h6>Total Balance (CAD)</h6>
+                    <h6 class='font-weight-bold'>Total Balance (CAD)</h6>
                 </div>
-                <div class="col-6">
+                <div class="col-6 text-right font-weight-bold">
                     <p>$<%= parseFloat(Math.round(user.balanceCAD * 100) / 100).toFixed(2); %></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
-                    <h6>Total Balance (USD)</h6>
+                    <h6 class='font-weight-bold'>Total Balance (USD)</h6>
                 </div>
-                <div class="col-6">
+                <div class="col-6 text-right font-weight-bold">
                     <p>$<%= parseFloat(Math.round(user.balanceUSD * 100) / 100).toFixed(2); %></p>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                 <div id='ExchangeHistory' class='p-0 pr-3'>
                         <% var i = 0 %>
                     <% user.convertHistory.forEach(function(convert){ %>
-                            <div class="row exchange m-1">
+                            <div class="row exchange m-2">
                                 <div class="col-5 m-0 p-0">
                                     <% if(convert.initialAmount === 'CAD') { %>
                                         <p class="font-weight-bold font-italic m-2">+ $<%= parseFloat(Math.round(convert.initialAmount * 100) / 100).toFixed(2)%> <%= convert.initialCurrency %></p>
@@ -96,19 +96,19 @@
                                 
                         <!-- Ability to pull down more information  ADD FEATURE-->
 
-                        <div class='collapse p-2' id='showExchange<%=i%>'>
+                        <div class='collapse p-2 ml-2 transactionBackground' id='showExchange<%=i%>'>
                             <p class='text-center letterSpacing mt-2'>Exchange Information</p>
                             <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <p class='font-weight-bold'>Exchanged</p>
                                     </div>
-                                    <div class="col-md-6 text-left text-md-right">
+                                    <div class="col-6 text-left text-right">
                                         <p>- $<%= parseFloat(Math.round(convert.initialAmount * 100) / 100).toFixed(2) %> <%= convert.initialCurrency %></p>
                                     </div>   
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <p class='font-weight-bold'>Received</p>
                                     </div>
-                                    <div class="col-md-6 text-left text-md-right">
+                                    <div class="col-6 text-left text-right">
                                         <p>+ $<%= parseFloat(Math.round(convert.endAmount * 100) / 100).toFixed(2) %> <%= convert.endCurrency %></p>
                                     </div>    
                             </div>
@@ -126,15 +126,15 @@
             </div>
         </div>
 
-        <div class="col-md-6 p-0">
+        <div class="col-sm-12 col-md-6 p-0">
             <h2 class='text-center mt-3 pb-2 border-bottom border-dark'>Transaction History</h2>
-   
-            <div id='transactionHistory' class=''>
-                <div class="justify-content-middle">
+
+            <div id='transactionHistory'>
+                <div>
                         <% var i = 0 %>
                     <% user.transactionHistory.forEach(function(transaction){ %>
                         <% if(transaction.to == currentUser._id) { %>
-                            <div class="row positive p-0 m-3">
+                            <div class="row positive p-0 m-2">
                                 <div class="col-5 p-0 m-0">
                                     <p class="font-weight-bold font-italic m-2">+ $<%= transaction.amount%> <%= transaction.currency %></p>
                                 </div>
@@ -149,7 +149,7 @@
                             </div>
                                 
                         <% } else { %>
-                            <div class="row negative p-0 m-3">
+                            <div class="row negative p-0 m-2">
                                 <div class="col-5 p-0 m-0">
                                     <p class="font-weight-bold font-italic p-0 m-2">- $<%= transaction.amount %> <%= transaction.currency %></p>
                                 </div>
@@ -166,41 +166,41 @@
         
                         <!-- Ability to pull down more information  ADD FEATURE-->
 
-                        <div class='collapse mr-3 mt-3 ml-3 mb-0 p-0' id='showTransaction<%=i%>'>
+                        <div class='collapse mr-3 ml-3 mb-0 p-2 transactionBackground' id='showTransaction<%=i%>'>
                             <p class='text-center letterSpacing mt-2'>Transaction Information</p>
                             <div class="row">
                                 <% if(transaction.from != currentUser._id) { %>
-                                    <div class="col-md-2">
+                                    <div class="col-4">
                                         <p class='font-weight-bold'>From</p>
                                     </div>
-                                    <div class="col-md-10 text-left text-md-right">
+                                    <div class="col-8 text-left text-right">
                                         <p><%= transaction.fromUsername %></p>
                                     </div>   
                                 <% } else { %>
-                                    <div class="col-md-2">
+                                    <div class="col-4">
                                         <p class='font-weight-bold'>To</p>
                                     </div>
-                                    <div class="col-md-10 text-left text-md-right">
+                                    <div class="col-8 text-left text-right">
                                         <p><%= transaction.toUsername %></p>
                                     </div>    
                                 <% } %> 
                             </div>
             
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-2">
                                     <p class='font-weight-bold'>Notes</p>
                                 </div>
-                                <div class="col-md-10 text-left text-md-right">
+                                <div class="col-10 text-left text-right">
                                     <p class='font-weight-light font-italic'><%= transaction.notes %></p>
                                 </div>
                             </div>
             
                             <div class="row">
-                                <div class="col-md-1">
+                                <div class="col-2">
                                     <p class='font-weight-bold'>Date</p>
                                 </div>
-                                <div class="col-md-11 text-left text-md-right">
-                                    <p><%= transaction.fullDate %></p>
+                                <div class="col-10 text-right">
+                                    <p><%= transaction.date %></p>
                                 </div>
                             </div>
 

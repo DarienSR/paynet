@@ -28,6 +28,7 @@ $('#getFirstCurrency').change(function(){
     }
 });
 
+
 $('#amountFirstTransfer').change(function(){
     showTransfer()
 });
@@ -40,9 +41,11 @@ var showTransfer = function(){
     var currency = $('#getFirstCurrency').val()
     if (currency === 'CAD') {
         var amount = firstAmount * CADtoUSD
+        var amount = parseFloat(Math.round(amount * 100) / 100).toFixed(2)
         $('#amountSecondTransfer').val(amount)
     } else {
         var amount = firstAmount * USDtoCAD
+        var amount = parseFloat(Math.round(amount * 100) / 100).toFixed(2)
         $('#amountSecondTransfer').val(amount)
     }
 }
