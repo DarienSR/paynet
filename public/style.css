@@ -2,7 +2,7 @@ body, html {
     height: 100%;
     /* background:rgba(49, 76, 230, 0.384);
     background: linear-gradient(to bottom, #449fab, #e361bd, #f3c4cf); */
-    background-color: linear-gradient(26deg, #1493df, #aba9db, #c17077);
+    background: linear-gradient(26deg, #1493df, #aba9db, #c17077);
     /* background-color: #8a97be; */
     /* background: linear-gradient(96deg, #343867, #05afe1, #fc4546); */
     font-family: 'Raleway', sans-serif;
