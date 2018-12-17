@@ -1,6 +1,8 @@
+
+
 body, html {
     height: 100%;
-    background: linear-gradient(26deg, #1493df, #aba9db, #c17077);
+    background: #c17077;
     font-family: 'Raleway', sans-serif;
 }
 
@@ -166,22 +168,13 @@ background: #244e74;
     margin: 0 auto
 }
 
-/*  extra Small Devices, Tablets */
-@media only screen and (min-width : 360px) {
-
-    #balance {
-        border-right: 1px;
-        border-color: black;
-    }
-
-    #transactionHistory {
-        width: 80%;
-    }
-}
-
 
 /* Medium Devices, Desktops */
-@media only screen and (min-width : 992px) {
+@media screen and (min-width : 992px) {
+
+    body, html {
+        background: linear-gradient(26deg, #1493df, #aba9db, #c17077);
+    }
 
     #transactionHistory {
         overflow: auto;
@@ -195,3 +188,20 @@ background: #244e74;
     }
 }
 
+
+/*  extra Small Devices, Tablets */
+@media screen and (max-width: 480px) {
+
+    body, html {
+        background: #c17077;
+    }
+
+    #balance {
+        border-right: 1px;
+        border-color: black;
+    }
+
+    #transactionHistory {
+        width: 80%;
+    }
+}
