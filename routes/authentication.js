@@ -34,7 +34,9 @@ router.get("/login", function(req, res){
 router.post("/login", passport.authenticate("local", 
     {
         successRedirect: "/account",
-        failureRedirect: "/login"
+        failureRedirect: "/login",
+        badRequestMessage : 'Invalid Username or Password',
+        failureFlash: true
     }), function(req, res){
 });
 
