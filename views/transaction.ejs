@@ -7,10 +7,30 @@
                 <h5 class="card-header white-text text-center py-4">
                     <strong>Payment</strong>
                 </h5>
+
                 <div class="card-body px-lg-5 pt-0">
                     <form action='/account' method='POST' class="text-center mt-3">
-                        <div class="form-row">
-                            <div class="col input-group mb-3">
+
+                        <div class="md-form">
+                            <label for="materialRegisterFormEmail">To</label>
+                            <select class='form-control' name='to' required>
+                                    <option></option>
+                                    <% allUsers.forEach(function(user){ %> 
+                                        <%  if(user.username == currentUser.username){ %>
+
+                                        <% } else {%>
+                                            <option value="<%=  user._id %>,<%= user.username %>">
+                                                <%= user.username %>
+                                            </option>     
+                                        <% }%>
+    
+                                    <% }); %>
+                            </select>
+                        </div>
+
+                        <!-- <label class='mt-4'>From</label> -->
+                        <div class="mt-4 form-row">
+                            <div class="col input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">$</span>
                                 </div>
@@ -24,12 +44,6 @@
 
                         <div class="row">
                             <div class="md-form d-flex justify-content-start col-12">
-                                <p class='p-0 m-0' id='currentBalanceText currentBalance'>
-                                    Balance
-                                </p>
-                            </div>
-                
-                            <div class="md-form d-flex justify-content-start col-12">
                                 <p class='p-0 m-0' id='currentBalance'>
                                     
                                 </p>
@@ -38,33 +52,16 @@
 
                         <script>
                             var currentBalance = document.getElementById('currentBalance')
-                            currentBalance.textContent = '$<%= parseFloat(Math.round(currentUser.balanceCAD * 100) / 100).toFixed(2) %> CAD'
+                            currentBalance.textContent = 'Balance in CAD account: $<%= parseFloat(Math.round(currentUser.balanceCAD * 100) / 100).toFixed(2) %>'
                             $('#getCurrency').change(function(){
                                 getCurrency = document.getElementById('getCurrency').value
                                 if(getCurrency === 'USD'){
-                                    currentBalance.textContent = '$<%= parseFloat(Math.round(currentUser.balanceUSD * 100) / 100).toFixed(2) %> USD'
+                                    currentBalance.textContent = 'Balance in USD account: $<%= parseFloat(Math.round(currentUser.balanceUSD * 100) / 100).toFixed(2) %>'
                                 } else {
-                                    currentBalance.textContent = '$<%= parseFloat(Math.round(currentUser.balanceCAD * 100) / 100).toFixed(2) %> CAD'
+                                    currentBalance.textContent = 'Balance in CAD account: $<%= parseFloat(Math.round(currentUser.balanceCAD * 100) / 100).toFixed(2) %>'
                                 }     
                             });
                         </script>
-    
-                        <div class="md-form">
-                            <label for="materialRegisterFormEmail">Users ID</label>
-                            <select class='form-control' name='to' required>
-                                    <option></option>
-                                    <% allUsers.forEach(function(user){ %> 
-                                      <%  if(user.username == currentUser.username){ %>
-
-                                       <% } else {%>
-                                            <option value="<%=  user._id %>,<%= user.username %>">
-                                                <%= user.username %>
-                                            </option>     
-                                       <% }%>
- 
-                                    <% }); %>
-                            </select>
-                        </div>
             
                         <div class="md-form mt-3">
                             <label for="materialRegisterFormPassword">Notes</label>
